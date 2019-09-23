@@ -1,0 +1,19 @@
+*{
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#main-btn-container {
+  display: flex;
+  border: 1px solid black;
+  align-content: center;
+  justify-content: center;
+}
+
+#mutiplier-input {
+  border: 1px solid black;
+  margin-bottom: 10px;
+}

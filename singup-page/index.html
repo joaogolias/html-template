@@ -56,9 +56,13 @@
 
     function deleteStudent(index) {
       console.log(students)
-      students.splice(index, 1)
-      updateList()
+      if(confirm('TEM CERTEZA?')) {
+        students.splice(index, 1)
+        updateList()
+      }
+  
     }
+
 
   </script>
 </body>

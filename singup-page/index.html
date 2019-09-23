@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="style.css" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container"">
+    <div id="signup-container">
+        <input id="name-input" class="custom-input" value="nome" onfocus="this.value = ''"/>
+        <input id="age-input" class="custom-input" value="idade" onfocus="this.value = ''"/>
+        <input id="work-input" class="custom-input" value="trampa (s/n)" onfocus="this.value = ''"/>
+        <div class="custom-button" id="save-btn">
+          <p> SALVAR </p>
+        </div>
+    </div>
+    <div id="students-list-container">
+      
+    </div>
+  </div>
+  <script>
+    let students = [{name: "João", age: 23, doWork: true}]
+    updateList()
+
+    function createAnUserCard(s) {
+      const string = 'MINHA STRING'
+      const k = `<div class="student-item-container"> 
+                  <p class="student-item-info"> ${s.name} </p>
+                  <p class="student-item-info"> ${s.age} </p>
+                  <p class="student-item-info"> ${s.doWork ? 'Trampa' : 'Não Trampa' }</p> 
+                  <div class="custom-button" id="delete-btn" onclick="deleteStudent(${students.indexOf(s)})">
+                    <p> DELETAR </p>
+                  </div>
+                </div>`
+      return k
+    }
+
+    function updateList() {
+      document.getElementById("students-list-container").innerHTML = ""
+      for(let student of students) {
+        document.getElementById("students-list-container").innerHTML += createAnUserCard(student)
+      }
+    }
+
+    document.getElementById("save-btn").addEventListener("click", () => {
+      const s = { name: "", age: 0, doWork: true}
+      s.name = document.getElementById("name-input").value
+      s.age = parseInt(document.getElementById("age-input").value)
+      s.doWork = document.getElementById("work-input").value === "s" ? true : false
+      students.push(s)
+      updateList()
+    })
+
+    function deleteStudent(index) {
+      console.log(students)
+      students.splice(index, 1)
+      updateList()
+    }
+
+  </script>
+</body>
+</html>

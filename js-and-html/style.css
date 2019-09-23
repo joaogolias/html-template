@@ -1,0 +1,9 @@
+#btn-container {
+  width: 200px;
+  border: 1px solid black;
+}
+.pretty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

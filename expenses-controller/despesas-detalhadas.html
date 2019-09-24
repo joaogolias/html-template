@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>Despesas Detalhadas</h2>
+
+  <div>
+    <div class="input-container">
+      <p class="label-texto">Tipo (Casa, Viagem, Rolês, Outros)</p>
+      <select id="filtro-tipo">
+        <option value="Casa">Casa</option>
+        <option value="Rolê">Rolê</option>
+        <option value="Viagem">Viagem</option>
+        <option value="Outros">Outros</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <p class="label-texto">Valor Mínimo</p>
+      <input id="filtro-valor-minimo" />
+    </div>
+    <div class="input-container">
+      <p class="label-texto">Valor Máximo</p>
+      <input id="filtro-valor-maximo" />
+    </div>
+    <button class="botao-comum" id="filtrar-btn">Filtrar</button>
+    <button class="botao-comum" id="limpar-filtros-btn">Limpar Filtros</button>
+  </div>
+
+  <div id="despesas-list-container"></div>
+
+  <script>
+
+    const despesas = buscaItem("despesas")
+
+    mostrarDespesas()
+
+    document.getElementById("filtrar-btn").addEventListener("click", () => {
+      const tipo = document.getElementById("filtro-tipo").value
+      const valorMaximo = document.getElementById("filtro-valor-maximo").value
+      const valorMinimo = document.getElementById("filtro-valor-minimo").value
+      limparFiltros()
+
+      if (valorMaximo) {
+        console.log("OH EU AQUI")
+        mostrarDespesas(despesas.filter((el) => {
+          console.log(el.valor)
+          console.log(parseFloat(el.valor) <= valorMaximo)
+          return parseFloat(el.valor) <= valorMaximo
+        }))
+        return
+      }
+
+      if (valorMinimo) {
+        mostrarDespesas(despesas.filter((el) => {
+          console.log(el.valor)
+          console.log(parseFloat(el.valor) >= valorMinimo)
+          return parseFloat(el.valor) >= valorMinimo
+        }))
+        return
+      }
+
+      if (tipo) {
+        mostrarDespesas(despesas.filter((el) => el.tipo === tipo))
+        return
+      }
+
+    })
+
+    document.getElementById("limpar-filtros-btn").addEventListener("click", () => {
+      limparFiltros()
+      mostrarDespesas()
+    })
+
+    function buscaItem(chave) {
+      const valor = window.localStorage.getItem(chave);
+      if (valor) {
+        return JSON.parse(valor);
+      }
+      return [];
+    }
+
+    function salvaItem(chave, item) {
+      if (item && chave) {
+        window.localStorage.setItem(chave, JSON.stringify(item));
+      }
+    }
+
+    function mostrarDespesas(lista = despesas) {
+      document.getElementById("despesas-list-container").innerHTML = ""
+      const itens = lista.map((despesa) => criarItemDeDespesa(despesa))
+
+      let componentFinal = ""
+      itens.forEach(item => {
+        componentFinal += item
+      })
+
+      document.getElementById("despesas-list-container").innerHTML = componentFinal
+    }
+
+    function limparFiltros() {
+      document.getElementById("filtro-tipo").value = ""
+      document.getElementById("filtro-valor-maximo").value = ""
+      document.getElementById("filtro-valor-minimo").value = ""
+    }
+
+    function criarItemDeDespesa(despesa) {
+      const itemDeDespesa = `<div class="despesa-item-container"> 
+                                  <p class="despesa-item-info"> R$ ${despesa.valor} </p>
+                                  <p class="despesa-item-info"> Tipo: ${despesa.tipo} </p>
+                                  <p class="despesa-item-info"> Descrição: ${despesa.descricao}</p> 
+                              </div>`
+
+      return itemDeDespesa
+    }
+  </script>
+</body>
+
+</html>

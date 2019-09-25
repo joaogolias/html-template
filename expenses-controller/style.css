@@ -1,0 +1,7 @@
+.main-container {
+  display: flex;
+}
+ 
+.custom-container {
+  margin-right: 20px;
+}

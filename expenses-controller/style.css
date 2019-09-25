@@ -5,3 +5,14 @@
 .custom-container {
   margin-right: 20px;
 }
+
+.extrato-item-container {
+  display: flex;
+  border: 1px dotted orange;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.extrato-item-info {
+  margin-right: 5px;
+}

@@ -101,7 +101,7 @@ function limparFiltros() {
 
 function criarItemDeDespesa(despesa) {
   const itemDeDespesa = `<div class="despesa-item-container"> 
-                              <p class="despesa-item-info"> R$ ${despesa.valor} </p>
+                              <p class="despesa-item-info"> R$${despesa.valor} </p>
                               <p class="despesa-item-info"> Tipo: ${despesa.tipo} </p>
                               <p class="despesa-item-info"> Descrição: ${despesa.descricao}</p> 
                           </div>`
@@ -117,9 +117,9 @@ function calcularValorTotal() {
 }
 
 function criarItemExtrato(despesa) {
-  const itemDeDespesa = `<div class="despesa-item-container"> 
-                              <p class="despesa-item-info"> ${despesa.tipo} </p>
-                              <p class="despesa-item-info"> R$ ${despesa.valor} </p>
+  const itemDeDespesa = `<div class="extrato-item-container"> 
+                              <p class="extrato-item-info"> ${despesa.tipo} - </p>
+                              <p class="extrato-item-info"> R$${despesa.valor} </p>
                           </div>`
 
   return itemDeDespesa
